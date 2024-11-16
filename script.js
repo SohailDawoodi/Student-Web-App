@@ -108,3 +108,17 @@ function loadStudents() {
             }
     });
 }
+function previewFile() {
+    const file = document.getElementById('file').files[0];
+    const preview = document.getElementById('photoPreview');
+    
+    if (file) {
+        const reader = new FileReader();
+        reader.onloadend = function() {
+            preview.src = reader.result;
+        }
+        reader.readAsDataURL(file);
+    } else {
+        preview.src = "";
+    }
+}
