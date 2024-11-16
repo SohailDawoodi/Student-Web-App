@@ -70,3 +70,30 @@ function validateForm() {
     saveStudentData();
     return true;
 }
+function loadStudents() {
+    let students = JSON.parse(localStorage.getItem('students')) || []; // اصلاح شده
+    const tableBody = document.getElementById('student-table').getElementsByTagName('tbody')[0];
+    const topStudentsDiv = document.getElementById('topStudents');
+
+    tableBody.innerHTML = '';
+    topStudentsDiv.innerHTML = '';
+
+    students.forEach(function (student, index) {
+        const newRow = tableBody.insertRow();
+        newRow.innerHTML =
+            `<td><img src="${student.photo}" alt="Student Photo" width="50" height="50" style="border-radius: 50%;"></td>
+            <td>${student.studentId}</td>
+            <td>${student.name}</td>
+            <td>${student.lastname}</td>
+            <td>${student.fatherName}</td>
+            <td>${student.department}</td>
+            <td>${student.age}</td>
+            <td>${student.gender}</td>
+            <td>${student.percentage}</td>
+            <td class="actions">
+                <button class="edit-btn" onclick="editStudent(${index})">Edit</button>
+                <button class="delete-btn" onclick="deleteStudent(${index})">Delete</button>
+            </td>`;
+           
+    });
+}
