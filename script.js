@@ -127,3 +127,23 @@ function editStudent(index) {
     localStorage.setItem('editingStudentIndex', index);
     window.location.href = 'information.html';
 }
+function loadEditingStudent() {
+    const editingIndex = localStorage.getItem('editingStudentIndex');
+    if (editingIndex !== null) {
+        const students = JSON.parse(localStorage.getItem('students')) || [];
+        const student = students[editingIndex];
+
+        if (student) {
+            document.getElementById('name').value = student.name;
+            document.getElementById('fatherName').value = student.fatherName;
+            document.getElementById('studentId').value = student.studentId;
+            document.getElementById('lastname').value = student.lastname;
+            document.getElementById('age').value = student.age;
+            document.getElementById('gender').value = student.gender;
+            document.getElementById('percentage').value = student.percentage;
+            document.getElementById('department').value = student.department;
+            document.getElementById('photoPreview').src = student.photo;
+            document.getElementById('submit-btn').innerText = "Update";
+        }
+    }
+}
