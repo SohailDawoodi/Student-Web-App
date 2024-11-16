@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students Web App</title>
+    <link rel="stylesheet" href="styleInformation.css">
+</head>
+<body>
+    <div id="container">
+        <h2>Student Information Form</h2>
+        <form action="#" id="studentForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter Your Name" required>
+            </div>
+            <div class="form-group">
+                <label for="studentId">ID:</label>
+                <input type="text" id="studentId" name="studentId" placeholder="Enter Your ID" required>
+            </div>
+            <div class="form-group">
+                <label for="fatherName">Father's Name:</label>
+                <input type="text" id="fatherName" name="fatherName" placeholder="Enter Your Father Name" required>
+            </div>
+            <div class="form-group">
+                <label for="lastname">Last Name:</label>
+                <input type="text" id="lastname" name="lastname" placeholder="Enter Your Last Name" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" placeholder="Enter Your Age" required min="1" max="90">
+            </div>
+            <div class="form-group">
+                <label for="department">Department:</label>
+                <input type="text" id="department" name="department" placeholder="Enter Your Department" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="Your Gender" selected>Your Gender:</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="percentage">Percentage:</label>
+                <input type="number" id="percentage" name="percentage" placeholder="Enter Your Degree" required min="0" max="100">
+            </div>
+            <div class="form-group">
+                <input type="file" id="file" class="custom-file-input" accept="image/*" required onchange="previewFile()">
+                <label for="file" class="file-label">Choose a file</label>
+            </div>
+            <div class="form-group" id="showpicture">
+                <label for="photoPreview">Profile Picture:</label>
+                <img id="photoPreview" src="images.png" alt="Profile Picture" class="photo-preview">
+            </div>
+            <div class="buttons">
+                <button type="reset">Cancel</button>
+                <button type="button" class="view-button" onclick="window.location.href='list of student.html'">View Student List</button>
+                <button type="submit" id="submit-btn">Submit</button>
+            </div>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
