@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Students Web App</title>
     <link rel="stylesheet" href="styleInformation.css">
 </head>
-
 <body>
     <div id="container">
         <h2>Student Information Form</h2>
@@ -46,12 +44,10 @@
             </div>
             <div class="form-group">
                 <label for="percentage">Percentage:</label>
-                <input type="number" id="percentage" name="percentage" placeholder="Enter Your Degree" required min="0"
-                    max="100">
+                <input type="number" id="percentage" name="percentage" placeholder="Enter Your Degree" required min="0" max="100">
             </div>
             <div class="form-group">
-                <input type="file" id="file" class="custom-file-input" accept="image/*" required
-                    onchange="previewFile()">
+                <input type="file" id="file" class="custom-file-input" accept="image/*" required onchange="previewFile()">
                 <label for="file" class="file-label">Choose a file</label>
             </div>
             <div class="form-group" id="showpicture">
@@ -60,13 +56,11 @@
             </div>
             <div class="buttons">
                 <button type="reset">Cancel</button>
-                <button type="button" class="view-button" onclick="window.location.href='tableofstudent.html'">View
-                    Student List</button>
-                <button type="submit" id="submit-btn">Submit</button>
+                <button type="button" class="view-button" onclick="window.location.href='tableofstudent.html'">View Student List</button>
+                <button type="submit" id="submit-btn" onclick="validateForm()">Submit</button>
             </div>
         </form>
     </div>
     <script src="script.js"></script>
 </body>
-
 </html>

@@ -1,3 +1,35 @@
+
+function validateForm() {
+    const inputs = document.querySelectorAll('#studentForm input, #studentForm select');
+    for (let input of inputs) {
+        if (input.value.trim() === '') {
+            alert('Please fill out all fields.');
+            return false;
+        }
+    }
+
+    const age = parseInt(document.getElementById('age').value);
+    if (isNaN(age) || age > 90) { // اصلاح شده
+        alert('Age must be a number less than or equal to 90.');
+        return false;
+    }
+
+    const percentage = parseFloat(document.getElementById('percentage').value);
+    if (isNaN(percentage) || percentage >= 101) { // اصلاح شده
+        alert('Percentage must be a number less than or equal to 100.');
+        return false;
+    }
+
+    const gender = document.getElementById('gender').value;
+    if (gender === "Your Gender") {
+        alert('Please select either Male or Female for gender.');
+        return false;
+    }
+
+    saveStudentData();
+    return true;
+}
+
 function saveStudentData() {
     const fileInput = document.getElementById('file');
     const reader = new FileReader();
@@ -17,59 +49,31 @@ function saveStudentData() {
             department: document.getElementById('department').value
         };
 
-        let students = JSON.parse(localStorage.getItem('students')) || [];
+        let students = JSON.parse(localStorage.getItem('students')) || []; // اصلاح شده
         const editingIndex = localStorage.getItem('editingStudentIndex');
 
         if (editingIndex !== null) {
             students[editingIndex] = student;
             localStorage.removeItem('editingStudentIndex');
-            alert('Student data updated successfully');
+            alert('Student data updated successfully'); // پیام موفقیت‌آمیز برای ویرایش
         } else {
             students.push(student);
-            alert('Student data saved successfully');
+            alert('Student data saved successfully'); // پیام موفقیت‌آمیز برای ذخیره‌سازی جدید
         }
 
         localStorage.setItem('students', JSON.stringify(students));
+        // alert('Student data saved successfully');
         document.getElementById('studentForm').reset();
         loadStudents();
     };
 
-    if (fileInput.files.length > 0) {
+    if (fileInput.files.length > 0) { // اصلاح شده
         reader.readAsDataURL(fileInput.files[0]);
     } else {
         alert('Please select a photo.');
     }
 }
-function validateForm() {
-    const inputs = document.querySelectorAll('#studentForm input, #studentForm select');
-    for (let input of inputs) {
-        if (input.value.trim() === '') {
-            alert('Please fill out all fields.');
-            return false;
-        }
-    }
 
-    const age = parseFloat(document.getElementById('age').value);
-    if (isNaN(age) || age > 90) {
-        alert('Age must be a number less than or equal to 90.');
-        return false;
-    }
-
-    const percentage = parseFloat(document.getElementById('percentage').value);
-    if (isNaN(percentage) || percentage >= 101) {
-        alert('Percentage must be a number less than or equal to 100.');
-        return false;
-    }
-
-    const gender = document.getElementById('gender').value;
-    if (gender === "Your Gender") {
-        alert('Please select either Male or Female for gender.');
-        return false;
-    }
-
-    saveStudentData();
-    return true;
-}
 function loadStudents() {
     let students = JSON.parse(localStorage.getItem('students')) || []; // اصلاح شده
     const tableBody = document.getElementById('student-table').getElementsByTagName('tbody')[0];
@@ -82,28 +86,29 @@ function loadStudents() {
         const newRow = tableBody.insertRow();
         newRow.innerHTML =
             `<td><img src="${student.photo}" alt="Student Photo" width="50" height="50" style="border-radius: 50%;"></td>
-                <td>${student.studentId}</td>
-                <td>${student.name}</td>
-                <td>${student.lastname}</td>
-                <td>${student.fatherName}</td>
-                <td>${student.department}</td>
-                <td>${student.age}</td>
-                <td>${student.gender}</td>
-                <td>${student.percentage}</td>
-                <td class="actions">
-                    <button class="edit-btn" onclick="editStudent(${index})">Edit</button>
-                    <button class="delete-btn" onclick="deleteStudent(${index})">Delete</button>
-                </td>`;
+            <td>${student.studentId}</td>
+            <td>${student.name}</td>
+            <td>${student.lastname}</td>
+            <td>${student.fatherName}</td>
+            <td>${student.department}</td>
+            <td>${student.age}</td>
+            <td>${student.gender}</td>
+            <td>${student.percentage}</td>
+            <td class="actions">
+                <button class="edit-btn" onclick="editStudent(${index})">Edit</button>
+                <button class="delete-btn" onclick="deleteStudent(${index})">Delete</button>
+            </td>`;
+
         if (parseFloat(student.percentage) > 90) {
             const profileDiv = document.createElement('div');
             profileDiv.className = 'profile';
 
             profileDiv.innerHTML =
                 `<img src="${student.photo}" alt="Student Photo" class="profile-photo">
-                        <h4>${student.name} ${student.lastname}</h4>
-                        <p>${student.department || 'N/A'}</p>
-                        <p>Percentage: ${student.percentage}</p>
-                        <p>Congratulations to ${student.name} for outstanding performance!</p>`;
+                <h4>${student.name} ${student.lastname}</h4>
+                <p>${student.department || 'N/A'}</p>
+                <p>Percentage: ${student.percentage}</p>
+                <p>Congratulations to ${student.name} for outstanding performance!</p>`;
             topStudentsDiv.appendChild(profileDiv);
         }
     });
@@ -111,10 +116,10 @@ function loadStudents() {
 function previewFile() {
     const file = document.getElementById('file').files[0];
     const preview = document.getElementById('photoPreview');
-
+    
     if (file) {
         const reader = new FileReader();
-        reader.onloadend = function () {
+        reader.onloadend = function() {
             preview.src = reader.result;
         }
         reader.readAsDataURL(file);
@@ -122,11 +127,13 @@ function previewFile() {
         preview.src = "";
     }
 }
+
 function editStudent(index) {
     const students = JSON.parse(localStorage.getItem('students')) || [];
     localStorage.setItem('editingStudentIndex', index);
-    window.location.href = 'information.html';
+    window.location.href = 'information.html'; // به صفحه ویرایش بروید
 }
+
 function loadEditingStudent() {
     const editingIndex = localStorage.getItem('editingStudentIndex');
     if (editingIndex !== null) {
@@ -134,6 +141,7 @@ function loadEditingStudent() {
         const student = students[editingIndex];
 
         if (student) {
+            // بارگذاری اطلاعات دانش‌آموز در فیلدها
             document.getElementById('name').value = student.name;
             document.getElementById('fatherName').value = student.fatherName;
             document.getElementById('studentId').value = student.studentId;
@@ -154,8 +162,8 @@ function deleteStudent(index) {
     localStorage.setItem('students', JSON.stringify(students));
     loadStudents();
 }
+
 window.onload = function () {
     loadStudents();
     loadEditingStudent();
 };
-
