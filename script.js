@@ -94,6 +94,17 @@ function loadStudents() {
                 <button class="edit-btn" onclick="editStudent(${index})">Edit</button>
                 <button class="delete-btn" onclick="deleteStudent(${index})">Delete</button>
             </td>`;
-           
+            if (parseFloat(student.percentage) > 90) {
+                const profileDiv = document.createElement('div');
+                profileDiv.className = 'profile';
+    
+                profileDiv.innerHTML =
+                    `<img src="${student.photo}" alt="Student Photo" class="profile-photo">
+                    <h4>${student.name} ${student.lastname}</h4>
+                    <p>${student.department || 'N/A'}</p>
+                    <p>Percentage: ${student.percentage}</p>
+                    <p>Congratulations to ${student.name} for outstanding performance!</p>`;
+                topStudentsDiv.appendChild(profileDiv);
+            }
     });
 }
