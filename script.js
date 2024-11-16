@@ -122,3 +122,8 @@ function previewFile() {
         preview.src = "";
     }
 }
+function editStudent(index) {
+    const students = JSON.parse(localStorage.getItem('students')) || [];
+    localStorage.setItem('editingStudentIndex', index);
+    window.location.href = 'information.html';
+}
