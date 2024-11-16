@@ -147,3 +147,10 @@ function loadEditingStudent() {
         }
     }
 }
+window.onload = loadEditingStudent();
+function deleteStudent(index) {
+    const students = JSON.parse(localStorage.getItem('students')) || [];
+    students.splice(index, 1);
+    localStorage.setItem('students', JSON.stringify(students));
+    loadStudents();
+}
